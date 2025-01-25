@@ -1,21 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body>
-    <h1>Login</h1>
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-        <div>
-            <label for="pseudo">Pseudo:</label>
-            <input type="text" name="pseudo" id="pseudo" required>
+@extends('layouts.master')
+
+@section('title', 'Connexion')
+
+@section('content')
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Connexion</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="pseudo" class="form-label">Pseudo</label>
+                        <input type="text" class="form-control" id="pseudo" name="pseudo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Mot de passe</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Se connecter</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <p>Pas encore inscrit ? <a href="{{ route('register') }}">Inscrivez-vous ici</a></p>
+            </div>
         </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" required>
-        </div>
-        <button type="submit">Login</button>
-    </form>
-</body>
-</html>
+    </div>
+</div>
+@endsection
