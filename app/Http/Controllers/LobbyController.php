@@ -26,7 +26,20 @@ class LobbyController extends Controller
        $games = Game::with(['player1', 'player2'])->where('status', 'waiting')->get();
 
        //  passer le joueur à la vue
-       return view('lobby', ['player' => $player],compact('players','games'));
+
+       if ($games->isEmpty()) {
+        return view('lobby', [
+            'player' => $player,
+            'players' => $players,
+            'games' => [],
+        ]);
+    }
+    return view('lobby', [
+        'player' => $player,
+        'players' => $players,
+        'games' => $games,
+    ]);
+      
    }
 
     
@@ -40,8 +53,25 @@ class LobbyController extends Controller
             'status' => 'waiting',
         ]);
 
-        return redirect()->route('games.show', $game->id);
+        return redirect()->route('games.show', ['id' => $game->id]);
     }
+
+    public function joinGame(Game $game)
+    {
+        // Vérifier si la partie est déjà commencée
+        if ($game->player2_id) {
+            return redirect()->route('lobby')->with('error', 'La partie a déja commencée !');
+        }
+
+        // Ajouter le deuxième joueur
+        $game->update([
+            'player2_id' => Auth::id(),
+            'status' => 'in_progress', // Passer la partie en "en cours"
+        ]);
+        // Redirigervers la page de la partie
+        return redirect()->route('games.show',  $game);
+    }
+
 
    
 

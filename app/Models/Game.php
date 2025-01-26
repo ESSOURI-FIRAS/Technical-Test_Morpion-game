@@ -13,7 +13,7 @@ class Game extends Model
     protected $fillable = ['player1_id', 'player2_id', 'winner_id', 'status'];
 
 
-    // Relation avec le joueur 1
+    // relation avec le joueur 1
     public function player1()
     {
         return $this->belongsTo(Player::class, 'player1_id');
@@ -27,7 +27,7 @@ class Game extends Model
 
 
 
-    // Relation avec le gagnant
+    // relation avec le gagnant
     public function winner()
     {
         return $this->belongsTo(Player::class, 'winner_id');

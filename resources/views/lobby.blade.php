@@ -44,24 +44,34 @@
               </tr>
           </thead>
           <tbody>
-              @foreach ($games as $game)
-                  <tr>
-                      <td class="py-2 px-4 border-b">{{ $game->id }}</td>
-                      <td class="py-2 px-4 border-b">{{ $game->player1 ? $game->player1->pseudo : 'Joueur inconnu' }}</td>
-                      <td class="py-2 px-4 border-b">
-                        @if ($game->player1_id === Auth::id())
-                        <span class="text-gray-500">waiting...</span>
-                        @else
-                        <form method="POST" action="{{ route('lobby.join-game', $game->id) }}">
-                            @csrf
-                            <button type="submit" class="btn btn-primary btn-sm">
-                                join
-                            </button>
-                        </form>
-                    @endif
-                </td>
-            </tr>
-        @endforeach
+            @if(empty($games))
+    <p>Aucune partie en attente</p>
+@else
+    @foreach ($games as $game)
+        <tr>
+            <td class="py-2 px-4 border-b">{{ $game->id }}</td>
+            <td class="py-2 px-4 border-b">{{ $game->player1 ? $game->player1->pseudo : 'Joueur inconnu' }}</td>
+            <td class="py-2 px-4 border-b">
+                @if ($game->player1_id === Auth::id())
+                    <form method="POST" action="{{ route('games.destroy', $game->id) }}" class="inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600">
+                            Supprimer
+                        </button>
+                    </form>
+                @else
+                    <form method="POST" action="{{ route('games.join', ['game' => $game->id]) }}">
+                        @csrf
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            join
+                        </button>
+                    </form>
+                @endif
+            </td>
+        </tr>
+    @endforeach
+@endif
       </tbody>
     </table>
     </div>
