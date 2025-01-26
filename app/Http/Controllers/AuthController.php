@@ -28,16 +28,25 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $fields=$request->validate([
+        $request->validate([
             'pseudo' => 'required|unique:players',
             'password' => 'required',
         ]);
 
+        /*
+        problème de Hashage ici
         $player = Player::create($fields);
+
+        */
+        $player = Player::create([
+            'pseudo' => $request->pseudo,
+            'password' => Hash::make($request->password), //pour hacher le mot de passe
+        ]);
+
 
         Auth::login($player);
 
-        return redirect('/');
+        return redirect()->route('lobby');
     }
 
 
@@ -51,10 +60,10 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($fields)) {
-            return redirect('/');
+            return redirect()->route('lobby');
         }
 
-        return back()->withErrors(['pseudo' => 'Invalid credentials']);
+        return back()->withErrors(['pseudo' => 'Invalid credentials !']);
     }
 
 
