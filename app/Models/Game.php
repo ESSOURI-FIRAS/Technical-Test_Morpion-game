@@ -13,17 +13,21 @@ class Game extends Model
     protected $fillable = ['player1_id', 'player2_id', 'winner_id', 'status'];
 
 
-    public function gamesAsPlayer1()
+    // Relation avec le joueur 1
+    public function player1()
     {
-        return $this->hasMany(Game::class, 'player1_id');
+        return $this->belongsTo(Player::class, 'player1_id');
     }
 
-    public function gamesAsPlayer2()
+    // Relation avec le joueur 2
+    public function player2()
     {
-        return $this->hasMany(Game::class, 'player2_id');
+        return $this->belongsTo(Player::class, 'player2_id');
     }
 
 
+
+    // Relation avec le gagnant
     public function winner()
     {
         return $this->belongsTo(Player::class, 'winner_id');

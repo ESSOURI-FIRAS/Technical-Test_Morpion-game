@@ -18,21 +18,21 @@ class Player extends Authenticatable
         'password',
     ];
 
-// Relations
-public function gamesAsPlayer1()
-{
-    return $this->hasMany(Game::class, 'player1_id');
-}
+        // relations
+    public function gamesAsPlayer1()
+    {
+        return $this->hasMany(Game::class, 'player1_id');
+    }
 
-public function gamesAsPlayer2()
-{
-    return $this->hasMany(Game::class, 'player2_id');
-}
+    public function gamesAsPlayer2()
+    {
+        return $this->hasMany(Game::class, 'player2_id');
+    }
 
-public function actions()
-{
-    return $this->hasMany(Action::class);
-}
+    public function actions()
+    {
+        return $this->hasMany(Action::class);
+    }
 
 
 
