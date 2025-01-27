@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: hwb(0 100% 0%);
+}
+
+.game-container {
+    text-align: center;
+   
+}
+
+h1 {
+    color: #333;
+ justify-content: center;
+}
+
+.player-info {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    color: #0b0b0c;
+    
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+    margin: 20px auto;
+    justify-content: center;
+   
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: #cac9c9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    border: 2px solid #131313;
+    cursor: pointer;
+}
+
+.cell.taken {
+    pointer-events: none;
+    background-color: #f9f9f9;
+}
+
+.status {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #24199d;
+    
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+    margin: 20px auto;
+    
+}
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    border: 1px solid #0d0c0c;
+    font-size: 2rem;
+    cursor: pointer;
+}
+.cell.taken {
+    pointer-events: none;
+}

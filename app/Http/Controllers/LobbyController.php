@@ -31,9 +31,9 @@ class LobbyController extends Controller
         return view('lobby', [
             'player' => $player,
             'players' => $players,
-            'games' => [],
+            //'games' => [],
         ]);
-    }
+        }
     return view('lobby', [
         'player' => $player,
         'players' => $players,
@@ -77,5 +77,3 @@ class LobbyController extends Controller
 
 }
 
-
-// {{ route('games.create') }} hethi nèottoha fel vue lobby mba3ed

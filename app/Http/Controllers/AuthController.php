@@ -36,8 +36,8 @@ class AuthController extends Controller
         /*
         problème de Hashage ici
         $player = Player::create($fields);
-
         */
+        
         $player = Player::create([
             'pseudo' => $request->pseudo,
             'password' => Hash::make($request->password), //pour hacher le mot de passe

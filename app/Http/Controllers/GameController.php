@@ -33,7 +33,7 @@ class GameController extends Controller
         ->first();
 
         if ($existingGame) {
-            return redirect()->route('lobby')->with('error', 'Vous avez déjà une partie en cours.');
+            return redirect()->route('lobby')->with('error', 'Vous avez déjà une partie en cours');
         }
 
         $game = Game::create([
@@ -44,22 +44,7 @@ class GameController extends Controller
         return redirect()->route('games.show', $game);
     }
 
-    // Rejoindre une partie
-    public function join(Game $game)
-    {
-        // Vérifier si la partie est déjà commencée
-        if ($game->player2_id) {
-            return redirect()->route('lobby')->with('error', 'La partie a déja commencée !');
-        }
-
-        // Ajouter le deuxième joueur
-        $game->update([
-            'player2_id' => Auth::id(),
-            'status' => 'in_progress', // Passer la partie en "en cours"
-        ]);
-        // Redirigervers la page de la partie
-        return redirect()->route('games.show', $game);
-    }
+    
 
 
     // Enregistrer un mouvement
@@ -105,11 +90,9 @@ class GameController extends Controller
                 return redirect()->route('lobby')->with('success', 'La partie a été supprimée.');
         }
 
-// Vérifier l'état de la partie
+    // Vérifier l'état de la partie
     protected function checkGameStatus(Game $game)
-    {
-        // Logique pour vérifier si un joueur a gagné ou si la partie est nulle
-        // (à implémenter selon les règles du Tic-Tac-Toe)
+    { 
     }
 
 
